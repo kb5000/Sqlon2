@@ -114,6 +114,10 @@ obj.to_string();
 
 Sqlon 2还提供了元信息功能方便调试。getTypeName返回其数据类型的String，而to_string返回其JSON格式的可读字符串。
 
+### 使用
+
+如果需要将Schema和Data一起传输，可以使用"L2SS"的Schema，将Schema放在前面，Data放在后面。这样就相当于将两个字符串进行打包，同时Schema是固定的。
+
 ### 注意
 
 Array功能目前还不完善，必须手动保证Array内部的所有数据都是同一结构的，不然序列化会出错。
