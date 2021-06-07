@@ -18,6 +18,7 @@ Sqlon 2是一个类JSON的通用的序列化库，生成的文件分为Schema和
 
 1. List和Object固定为不可变长，也就是长度信息储存在Schema中而非Data中，因为存储在Data是毫无意义的。Object的固定长度Key也去掉，虽然其可以降低占用空间但基本无法使用。
 2. 增加了Array类型，后面只跟一个Sqlon序列，但可以根据Data中的长度信息重复多次，这使得Sqlon的Schema可以表示变长数据，是真正的变长功能，不再需要愚蠢的L2SS了。
+3. Null类型改为占用1字节，这样防止Array类型带来的问题。
 
 ### Schema定义
 
@@ -40,7 +41,8 @@ Sqlon 2是一个类JSON的通用的序列化库，生成的文件分为Schema和
 
 | Sqlon 2类型 | Data格式 | 空间 |
 | - | - | - |
-| Null | 不存储 | 0 |
+| Null | 存储为N | 1字节 |
+| Bool | 存储为T或F | 1字节 |
 | Int | 小端序 | 8字节 |
 | Double | 小端序 | 8字节 |
 | String | 如果是可变长的先8字节Int型长度后接字节序列 | 变长 |
